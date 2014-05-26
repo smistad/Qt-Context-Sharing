@@ -26,6 +26,7 @@ WindowWidget::WindowWidget(QGLContext* context) {
 }
 
 void View::paintGL() {
+    // TODO force a specific GL context
     std::cout << "View GL context: " << glXGetCurrentContext() << std::endl;
     glColor3f(1,0,0);
     glBegin(GL_QUADS);
@@ -56,6 +57,7 @@ int main(int argc, char ** argv) {
 
     context->makeCurrent();
     std::cout << "Initial GL context: " << glXGetCurrentContext() << std::endl;
+    // TODO Send the actual GL context to the View
 
     WindowWidget *window1 = new WindowWidget(context);
     window1->show();
@@ -63,10 +65,6 @@ int main(int argc, char ** argv) {
     if(context->isSharing()) {
         std::cout << "initial context is sharing" << std::endl;
     }
-    /*
-    Window *window2 = new Window(context);
-    window2->show();
-    */
 
     QApplication::exec();
 
